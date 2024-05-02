@@ -16,7 +16,7 @@ import java.util.UUID;
 @Service
 public class BeerClientImpl implements BeerClient {
     private final RestTemplateBuilder restTemplateBuilder;
-    private final String URL = "/api/v1/beer";
+    private final String GET_BEER_PATH = "/api/v1/beer";
     private static final String GET_BEER_BY_ID_PATH = "/api/v1/beer/{beerId}";
 
     @Override
@@ -24,10 +24,22 @@ public class BeerClientImpl implements BeerClient {
         RestTemplate restTemplate = restTemplateBuilder.build();
         return restTemplate.getForObject(GET_BEER_BY_ID_PATH, BeerDTO.class, beerId);
     }
+
+
+    @Override
+    public BeerDTO createBeer(BeerDTO newDto) {
+        RestTemplate restTemplate = restTemplateBuilder.build();
+
+        ResponseEntity<BeerDTO> response = restTemplate.postForEntity(GET_BEER_PATH, newDto, BeerDTO.class);
+
+        return null;
+    }
+
+
     @Override
     public Page<BeerDTO> listBeers(String beerName) {
         RestTemplate restTemplate =restTemplateBuilder.build();
-        UriComponentsBuilder builder = UriComponentsBuilder.fromPath(URL);
+        UriComponentsBuilder builder = UriComponentsBuilder.fromPath(GET_BEER_PATH);
         if(beerName != null && !beerName.isEmpty()) {
             builder.queryParam("beerName", beerName);
         }
