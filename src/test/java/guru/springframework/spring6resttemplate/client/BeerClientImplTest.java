@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
@@ -71,6 +73,26 @@ class BeerClientImplTest {
         BeerDTO updatedBeer = client.updateBeer(beerDto);
 
         assertEquals(newName, updatedBeer.getBeerName());
+    }
+    @Test
+    void testDeleteBeer() {
+
+        BeerDTO newDto = BeerDTO.builder()
+                .price(new BigDecimal("10.99"))
+                .beerName("Mango Bobs 2")
+                .beerStyle(BeerStyle.IPA)
+                .quantityOnHand(500)
+                .upc("123245")
+                .build();
+
+        BeerDTO beerDto = client.createBeer(newDto);
+
+        UUID beerId = beerDto.getId();
+        beerDto.setId(beerId);
+        client.deleteBear(beerId);
+        assertThrows(HttpClientErrorException.class,()-> client.getBeerById(beerId));
+
+
     }
 
 }
