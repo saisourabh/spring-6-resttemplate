@@ -10,6 +10,8 @@ public interface BeerClient {
 
     BeerDTO getBeerById(UUID beerId);
 
+    BeerDTO updateBeer(BeerDTO beerDto);
+
     BeerDTO createBeer(BeerDTO newDto);
 
     Page<BeerDTO> listBeers(String beerName);
