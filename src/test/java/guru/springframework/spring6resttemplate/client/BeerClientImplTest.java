@@ -24,5 +24,17 @@ class BeerClientImplTest {
         Page<BeerDTO> result = client.listBeers("ALE");
         System.out.println("result:\n"+result);
     }
+    @Test
+    void getBeerById() {
+
+        Page<BeerDTO> beerDTOS = client.listBeers(null);
+
+        BeerDTO dto = beerDTOS.getContent().get(0);
+
+        BeerDTO byId = client.getBeerById(dto.getId());
+
+        assertNotNull(byId);
+        System.out.println(byId);
+    }
 
 }
