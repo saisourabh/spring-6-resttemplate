@@ -32,10 +32,12 @@ public class BeerClientImpl implements BeerClient {
 //        System.out.println("Map:value\n"+response2.getBody().values());
 
         ResponseEntity<JsonNode> jsonNodeResponse = restTemplate.getForEntity("http://localhost:8080/api/v1/beer", JsonNode.class);
-        System.out.println("json:\n"+jsonNodeResponse.getBody());
-        System.out.println("json:\n"+jsonNodeResponse.getBody().toPrettyString());
-        System.out.println("json:\n"+jsonNodeResponse.getBody().get("content"));
-
+//        System.out.println("json:\n"+jsonNodeResponse.getBody());
+//        System.out.println("json:\n"+jsonNodeResponse.getBody().toPrettyString());
+//        System.out.println("json:\n"+jsonNodeResponse.getBody().get("content"));
+        System.out.println("json:\n"+jsonNodeResponse.getBody().findPath("content"));
+        jsonNodeResponse.getBody().findPath("content").elements().forEachRemaining(node ->
+                System.out.println("node:\n"+node.get("beerName").toString()+"_"+node.get("id").toString()));
         return null;
     }
 }
