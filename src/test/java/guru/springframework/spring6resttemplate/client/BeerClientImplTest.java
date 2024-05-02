@@ -16,7 +16,12 @@ class BeerClientImplTest {
 
     @Test
     void listBeers(){
-        Page<BeerDTO> result = client.listBeers();
+        Page<BeerDTO> result = client.listBeers(null);
+        System.out.println("result:\n"+result);
+    }
+    @Test
+    void listBeerswithname(){
+        Page<BeerDTO> result = client.listBeers("ALE");
         System.out.println("result:\n"+result);
     }
 

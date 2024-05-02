@@ -16,11 +16,15 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class BeerClientImpl implements BeerClient {
     private final RestTemplateBuilder restTemplateBuilder;
     private final String URL = "/api/v1/beer";
+
     @Override
-    public Page<BeerDTO> listBeers() {
+    public Page<BeerDTO> listBeers(String beerName) {
         RestTemplate restTemplate =restTemplateBuilder.build();
         UriComponentsBuilder builder = UriComponentsBuilder.fromPath(URL);
-
+        if(beerName != null && !beerName.isEmpty()) {
+            builder.queryParam("beerName", beerName);
+        }
+        System.out.println("url = " + builder.toUriString());
         ResponseEntity<BeerDTOPageImpl> jsonNodeResponse = restTemplate.getForEntity(builder.toUriString(), BeerDTOPageImpl.class);
         System.out.println(jsonNodeResponse.getBody());
         return jsonNodeResponse.getBody();
