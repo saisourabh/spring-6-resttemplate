@@ -6,5 +6,5 @@ import org.springframework.data.domain.Pageable;
 
 public interface BeerClient {
 
-    Page<BeerDTO> listBeers(Pageable pageable);
+    Page<BeerDTO> listBeers();
 }
