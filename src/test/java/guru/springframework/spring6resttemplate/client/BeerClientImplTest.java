@@ -23,6 +23,7 @@ class BeerClientImplTest {
     void listBeers(){
         Page<BeerDTO> result = client.listBeers(null);
         System.out.println("result:\n"+result);
+        System.out.println("BeerClientImpl:"+ client);
     }
     @Test
     void listBeerswithname(){

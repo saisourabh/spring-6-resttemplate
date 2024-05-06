@@ -17,4 +17,5 @@ public interface BeerClient {
     BeerDTO createBeer(BeerDTO newDto);
 
     Page<BeerDTO> listBeers(String beerName);
+    Page<BeerDTO> listBeers();
 }

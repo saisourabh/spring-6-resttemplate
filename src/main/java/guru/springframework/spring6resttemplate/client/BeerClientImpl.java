@@ -17,8 +17,8 @@ import java.util.UUID;
 @Service
 public class BeerClientImpl implements BeerClient {
     private final RestTemplateBuilder restTemplateBuilder;
-    private final String GET_BEER_PATH = "/api/v1/beer";
-    private static final String GET_BEER_BY_ID_PATH = "/api/v1/beer/{beerId}";
+    public static final String GET_BEER_PATH = "/api/v1/beer";
+    public static final String GET_BEER_BY_ID_PATH = "/api/v1/beer/{beerId}";
 
     @Override
     public BeerDTO getBeerById(UUID beerId) {
@@ -61,5 +61,10 @@ public class BeerClientImpl implements BeerClient {
         ResponseEntity<BeerDTOPageImpl> jsonNodeResponse = restTemplate.getForEntity(builder.toUriString(), BeerDTOPageImpl.class);
         System.out.println(jsonNodeResponse.getBody());
         return jsonNodeResponse.getBody();
+    }
+
+    @Override
+    public Page<BeerDTO> listBeers() {
+        return this.listBeers(null );
     }
 }

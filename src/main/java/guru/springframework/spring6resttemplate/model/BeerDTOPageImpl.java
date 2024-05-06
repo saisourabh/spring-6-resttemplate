@@ -22,6 +22,7 @@ public class BeerDTOPageImpl<BeerDTO> extends PageImpl<guru.springframework.spri
         super(content, pageable, total);
     }
 
+
     public BeerDTOPageImpl(List<guru.springframework.spring6resttemplate.model.BeerDTO> content) {
         super(content);
     }
